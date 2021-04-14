@@ -1,21 +1,31 @@
-from mltext import classifyText, storeText
-from mlmodel import trainModel, checkModel
 import requests
-
 
 with open("apikey", "r") as f:
     API_KEY = f.read()
     f.close()
 
-test_text = "The text that you want to test"
+API_URL = "https://machinelearningforkids.co.uk/api/scratch/" + key + "/classify"
 
-# CHANGE THIS to the text that you want to add
-# to your project training data
-training_text = "The text that you want to store"
 
-# CHANGE THIS to the training bucket to add the
-# training example to
-training_label = "questions"
+# This function will pass your text to the machine learning model
+# and return the top result with the highest confidence
+def classify(text):
+    response = requests.get(API_URL, params={"data": text})
 
-# remove the comment on the next line to use this
-storeText(API_KEY, training_text, training_label)
+    if response.ok:
+        responseData = response.json()
+        topMatch = responseData[0]
+        return topMatch
+    else:
+        response.raise_for_status()
+
+
+# CHANGE THIS to something you want your machine learning model to classify
+demo = classify("")
+
+label = demo["class_name"]
+confidence = demo["confidence"]
+
+
+# CHANGE THIS to do something different with the result
+print("result: '%s' with %d%% confidence" % (label, confidence))
