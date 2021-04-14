@@ -1,16 +1,12 @@
 import requests
 
-with open("apikey", "r") as f:
-    API_KEY = f.read()
-    f.close()
-
-API_URL = "https://machinelearningforkids.co.uk/api/scratch/" + API_KEY + "/classify"
-
-
 # This function will pass your text to the machine learning model
 # and return the top result with the highest confidence
 def classify(text):
-    response = requests.get(API_URL, params={"data": text})
+    key = "64b9a8f0-9d22-11eb-baa9-e77a2929f77b6dfd8f2b-987e-430b-80d0-7f6cb47dbb74"
+    url = "https://machinelearningforkids.co.uk/api/scratch/"+ key + "/classify"
+
+    response = requests.get(url, params={"data": text})
 
     if response.ok:
         responseData = response.json()
@@ -21,11 +17,11 @@ def classify(text):
 
 
 # CHANGE THIS to something you want your machine learning model to classify
-demo = classify("")
+demo = classify("The text that you want to test")
 
 label = demo["class_name"]
 confidence = demo["confidence"]
 
 
 # CHANGE THIS to do something different with the result
-print("result: '%s' with %d%% confidence" % (label, confidence))
+print ("result: '%s' with %d%% confidence" % (label, confidence))
