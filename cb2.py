@@ -4,7 +4,7 @@ with open("apikey", "r") as f:
     API_KEY = f.read()
     f.close()
 
-API_URL = "https://machinelearningforkids.co.uk/api/scratch/" + key + "/classify"
+API_URL = "https://machinelearningforkids.co.uk/api/scratch/" + API_KEY + "/classify"
 
 
 # This function will pass your text to the machine learning model
