@@ -1,10 +1,10 @@
 import requests
+from config import API_KEY
 
 # This function will pass your text to the machine learning model
 # and return the top result with the highest confidence
 def classify(text):
-    key = "64b9a8f0-9d22-11eb-baa9-e77a2929f77b6dfd8f2b-987e-430b-80d0-7f6cb47dbb74"
-    url = "https://machinelearningforkids.co.uk/api/scratch/"+ key + "/classify"
+    url = "https://machinelearningforkids.co.uk/api/scratch/"+ API_KEY + "/classify"
 
     response = requests.get(url, params={"data": text})
 
