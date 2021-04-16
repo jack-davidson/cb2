@@ -17,7 +17,7 @@ def classify(text):
 
 
 # CHANGE THIS to something you want your machine learning model to classify
-demo = classify("The text that you want to test")
+demo = classify("I dropped my phone in water")
 
 label = demo["class_name"]
 confidence = demo["confidence"]
