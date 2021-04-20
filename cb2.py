@@ -1,18 +1,16 @@
-#!/usr/bin/env python3
 import requests
-import json
-from config import API
+import tokens
 
-
-with open("data.json", "r") as data_fp:
-    chat_data = json.load(data_fp)
-    data_fp.close()
+key = input("api key:")
+url = "https://machinelearningforkids.co.uk/api/scratch/" + tokens.key + "/classify"
 
 
 # This function will pass your text to the machine learning model
 # and return the top result with the highest confidence
 def classify(text):
-    response = requests.get(API.URL, params={"data": text})
+
+    response = requests.get(url, params={"data": text})
+
     if response.ok:
         responseData = response.json()
         topMatch = responseData[0]
@@ -22,6 +20,9 @@ def classify(text):
 
 
 while True:
-    query = input("> ")
-    response = classify(query)
-    print(response["class_name"])
+    model_input = classify(input("> "))
+
+    label = model_input["class_name"]
+    confidence = model_input["confidence"]
+
+    print(label)
