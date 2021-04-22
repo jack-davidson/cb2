@@ -28,6 +28,7 @@ def respond(label, confidence):
 
     return "I'm sorry, I can't understand. You will be forwarded to a human expert soon."
 
+
 print("Welcome To The Version Service Chatbot! Presss Ctrl-C To Quit:")
 while True:
     model_input = classify(input("> "))
