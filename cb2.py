@@ -3,6 +3,7 @@ import tokens
 
 url = "https://machinelearningforkids.co.uk/api/scratch/" + tokens.key + "/classify"
 
+
 # This function will pass your text to the machine learning model
 # and return the top result with the highest confidence
 def classify(text):
@@ -18,7 +19,12 @@ def classify(text):
 
 
 def respond(label, confidence):
-    categories_responses = [{"Category": "EndOfConversation", "Response": "We are glad that you got the help you needed, bye!"}]
+    categories_responses = [
+        {
+            "Category": "EndOfConversation",
+            "Response": "We are glad that you got the help you needed, bye!"
+        }
+    ]
     for category_response in categories_responses:
         category = category_response["Category"]
         response = category_response["Response"]
@@ -27,6 +33,7 @@ def respond(label, confidence):
             return response
 
     return "I'm sorry, I can't understand. You will be forwarded to a human expert soon."
+
 
 print("Welcome To The Version Service Chatbot! Presss Ctrl-C To Quit:")
 while True:
