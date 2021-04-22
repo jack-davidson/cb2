@@ -4,10 +4,7 @@ import tokens
 
 url = "https://machinelearningforkids.co.uk/api/scratch/" + tokens.key + "/classify"
 
-# This function will pass your text to the machine learning model
-# and return the top result with the highest confidence
 def classify(text):
-
     response = requests.get(url, params={"data": text})
 
     if response.ok:
@@ -22,7 +19,7 @@ def respond(label, confidence):
     categories_responses = [
             {
                 "Category": "InternetError",
-                "Response": "Please Use This Official Verizon TroubleShooter To Fix Your Internet Issue (https://www.verizon.com/foryourhome/vzrepair/flowengine/UFDService.aspx?Keyword=FIX_CCON)."
+                "Response": "Please Use This Official Verizon TroubleShooter To Fix Your Internet Issue\(https://www.verizon.com/foryourhome/vzrepair/flowengine/UFDService.aspx?Keyword=FIX_CCON)."
             },
             {
                 "Category": "EndOfConversation",
@@ -30,7 +27,7 @@ def respond(label, confidence):
             },
             {
                 "Category": "CustomerNeedsHelp",
-                "Response": "We hear your concerns about not being able to reach customer service, and are forwarding you to an expert."
+                "Response": "We hear your concerns about not being able to reach customer service,\nand are forwarding you to an expert."
             },
             {
                 "Category": "BillingError",
@@ -38,7 +35,7 @@ def respond(label, confidence):
             },
             {
                 "Category": "InternetSpeedError",
-                "Response": "Please Use This Speed Test (https://www.verizon.com/speedtest/) while I forward you to an expert!"
+                "Response": "Please Use This Speed Test (https://www.verizon.com/speedtest/)\nwhile I forward you to an expert!"
             },
             {
                 "Category": "CableError",
@@ -56,7 +53,8 @@ def respond(label, confidence):
     return "I'm sorry, I can't understand. You will be forwarded to a human expert soon."
 
 
-print("Welcome To The Version Service Chatbot! Presss Ctrl-C To Quit:")
+print("Welcome To The Version Service Chatbot! Presss Ctrl-C To Quit:\n\n\
+How can I help you?")
 while True:
     model_input = classify(input("> "))
 
@@ -64,3 +62,4 @@ while True:
     confidence = model_input["confidence"]
     
     print(respond(label, confidence))
+    print("Is there any thing else I can help you with?")
