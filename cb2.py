@@ -4,10 +4,7 @@ import tokens
 
 url = "https://machinelearningforkids.co.uk/api/scratch/" + tokens.key + "/classify"
 
-# This function will pass your text to the machine learning model
-# and return the top result with the highest confidence
 def classify(text):
-
     response = requests.get(url, params={"data": text})
 
     if response.ok:
