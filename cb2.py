@@ -27,7 +27,7 @@ def respond(label, confidence):
             },
             {
                 "Category": "CustomerNeedsHelp",
-                "Response": "We hear your concerns about not being able to reach customer service,\nand are forwarding you to an expert."
+                "Response": "We hear your concerns about not being able to reach customer service, and are forwarding you to an expert."
             },
             {
                 "Category": "BillingError",
@@ -35,7 +35,7 @@ def respond(label, confidence):
             },
             {
                 "Category": "InternetSpeedError",
-                "Response": "Please Use This Speed Test (https://www.verizon.com/speedtest/)\nwhile I forward you to an expert!"
+                "Response": "Please Use This Speed Test (https://www.verizon.com/speedtest/) while I forward you to an expert!"
             },
             {
                 "Category": "CableError",
@@ -47,19 +47,26 @@ def respond(label, confidence):
         category = category_response["Category"]
         response = category_response["Response"]
 
-        if label == category and confidence > 10:
+        if label == category and confidence > 5:
             return response
 
     return "I'm sorry, I can't understand. You will be forwarded to a human expert soon."
 
 
-print("Welcome To The Version Service Chatbot! Presss Ctrl-C To Quit:\n\n\
-How can I help you?")
+print("Welcome To The Version Service Chatbot! Press Ctrl-C To Quit:")
+print("\nWhat can I help you with?")
 while True:
     model_input = classify(input("> "))
 
     label = model_input["class_name"]
     confidence = model_input["confidence"]
-    
+  
     print(respond(label, confidence))
-    print("Is there any thing else I can help you with?")
+    next_action = input("Was this response helpful? (Y/N)")
+
+    if next_action.lower() == 'n':
+      print("Forwarding you to a human expert!")
+      break 
+
+    print("\nIs there any thing else I can help you with?")
+
