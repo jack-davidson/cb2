@@ -47,7 +47,7 @@ def respond(label, confidence):
         category = category_response["Category"]
         response = category_response["Response"]
 
-        if label == category and confidence > 5:
+        if label == category and confidence > 10:
             return response
 
     return "I'm sorry, I can't understand. You will be forwarded to a human expert soon."
