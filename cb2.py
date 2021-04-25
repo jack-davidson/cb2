@@ -19,7 +19,7 @@ def respond(label, confidence):
     categories_responses = [
             {
                 "Category": "InternetError",
-                "Response": "Please Use This Official Verizon TroubleShooter To Fix Your Internet Issue\(https://www.verizon.com/foryourhome/vzrepair/flowengine/UFDService.aspx?Keyword=FIX_CCON)."
+                "Response": "Please Use This Official Verizon TroubleShooter To Fix Your Internet Issue (https://www.verizon.com/foryourhome/vzrepair/flowengine/UFDService.aspx?Keyword=FIX_CCON)."
             },
             {
                 "Category": "EndOfConversation",
@@ -53,20 +53,25 @@ def respond(label, confidence):
     return "I'm sorry, I can't understand. You will be forwarded to a human expert soon."
 
 
-print("Welcome To The Version Service Chatbot! Press Ctrl-C To Quit:")
+print("Welcome To The Version Service Chatbot! Press Ctrl-C or type /quit To Quit:")
 print("\nWhat can I help you with?")
 while True:
-    model_input = classify(input("> "))
+    user_input = input("> ")
+
+    if user_input == "/quit":
+        exit(0)
+
+    model_input = classify(user_input)
 
     label = model_input["class_name"]
     confidence = model_input["confidence"]
-  
+
     print(respond(label, confidence))
-    next_action = input("Was this response helpful? (Y/N)")
+    print("Was this response helpful? [Y/n]", end="")
+    next_action = input()
 
     if next_action.lower() == 'n':
-      print("Forwarding you to a human expert!")
-      break 
+        print("Forwarding you to a human expert!")
+        break
 
     print("\nIs there any thing else I can help you with?")
-
