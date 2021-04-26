@@ -4,6 +4,7 @@ import tokens
 
 url = "https://machinelearningforkids.co.uk/api/scratch/" + tokens.key + "/classify"
 
+
 def classify(text):
     response = requests.get(url, params={"data": text})
 
